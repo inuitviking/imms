@@ -8,7 +8,7 @@ class Route {
 	/**
 	 * @var false|int|string
 	 */
-	private bool $pathExists;
+	private bool|int|string $pathExists;
 	/**
 	 * @var array
 	 */
@@ -28,10 +28,12 @@ class Route {
 	private string $defaultView;
 
 	public function __construct(){
+		// Select a default view
 		$this->defaultView		= '../src/documents/index.md';
 
-		// Regarding paths
+		// Fetch current path
 		$this->path				= ltrim($_SERVER['REQUEST_URI'],'/');	// Current path
+
 		$urlParams = ltrim(substr($this->path, strpos($this->path, '?')), '?'); // Get the parameters
 		$urlParams = explode('&', $urlParams); // Split them up if there are more than one
 		// If path has "?" remove it from the path, as it will be read wrong.
