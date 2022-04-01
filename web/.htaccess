@@ -1,0 +1,24 @@
+RewriteEngine On
+
+#Allow access to files folder
+#RewriteRule ^(files)($|/) - [L]
+
+# This ensures that links to various things work before everything is rewritten
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{DOCUMENT_ROOT}/$1 -f
+RewriteRule ^[^/]+/([^.]+\.(?:js|css|jpe?g|png|gif))$ /$1 [L,R=301,NC]
+
+# Rewrite first parameter
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)$ index.php?page=$1 [L]
+
+# Rewrite uid paramter
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/([^/]+)$ index.php?page=$1&uid=$2 [L]
+
+#Make sure users are on HTTPS
+#RewriteCond %{ENV:HTTPS} !on
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
