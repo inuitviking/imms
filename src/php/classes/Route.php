@@ -30,7 +30,7 @@ class Route {
 
 	public function __construct(){
 		// Select a default view
-		$this->defaultView		= '../src/documents/index.md';
+		$this->defaultView		= '../src/documents/index';
 
 		// Fetch current path
 		$this->path				= ltrim($_SERVER['REQUEST_URI'],'/');	// Current path
@@ -45,7 +45,7 @@ class Route {
 		// Split the path into various elements.
 		$this->elements			= preg_split('/ [\/|?|&] /', $this->path);
 		// Check if path exists.
-		$this->pathExists = file_exists('../src/documents/' . $this->path);
+		$this->pathExists = file_exists('../src/documents/' . $this->path . '.md');
 
 		// Compile SCSS
 		$compiler = new Compiler();
@@ -64,10 +64,10 @@ class Route {
 
 		// routing.
 		if(empty($this->elements[0])){
-			echo $converter->convert(file_get_contents($this->defaultView));
+			echo $converter->convert(file_get_contents($this->defaultView . '.md'));
 		}else{
 			if ($this->pathExists !== false) {
-				echo $converter->convert(file_get_contents('../src/documents/' . $this->path));
+				echo $converter->convert(file_get_contents('../src/documents/' . $this->path . '.md'));
 			}else{
 				// Show 404
 				echo $converter->convert(file_get_contents('../src/documents/errors/404.md'));
