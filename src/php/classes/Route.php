@@ -27,10 +27,18 @@ class Route {
 	 */
 	private array $titles;
 	private string $defaultView;
+	private string $defaultMDPath;
+	private string $defaultHTMLPath;
+	private bool $MDExists;
+	private bool $HTMLExists;
 
 	public function __construct(){
+		// Default MD path
+		$this->defaultMDPath	= '../src/documents/';
+		// Default HTML path
+		$this->defaultHTMLPath	= 'assets/cache/';
 		// Select a default view
-		$this->defaultView		= '../src/documents/index';
+		$this->defaultView		= 'index';
 
 		// Fetch current path
 		$this->path				= ltrim($_SERVER['REQUEST_URI'],'/');	// Current path
@@ -44,8 +52,19 @@ class Route {
 
 		// Split the path into various elements.
 		$this->elements			= preg_split('/ [\/|?|&] /', $this->path);
-		// Check if path exists.
-		$this->pathExists = file_exists('../src/documents/' . $this->path . '.md');
+		// Check if MD exists.
+		$this->MDExists = file_exists($this->defaultMDPath . $this->path . '.md');
+		// Check if HTML exists.
+		$this->HTMLExists = file_exists($this->defaultHTMLPath . $this->path . '.html');
+
+		$cache = new Cache();
+
+		// If the HTML doesn't exist, create a new cached version of the raw MD. If the MD file doesn't exist, do nothing, and let it fail.
+		if ($this->HTMLExists !== true) {
+			if ($this->MDExists) {
+				$cache->MD2HTML($this->defaultMDPath . $this->path . '.md');
+			}
+		}
 
 		// Compile SCSS
 		$compiler = new Compiler();
@@ -56,23 +75,34 @@ class Route {
 		// Get header
 		require_once 'assets/viewables/header.php';
 
-		// Prepare the markdown converter
-		$converter = new CommonMarkConverter([
-			'html_input' => 'strip',
-			'allow_unsafe_links' => false,
-		]);
-
-		// routing.
+		// Routing.
 		if(empty($this->elements[0])){
-			echo $converter->convert(file_get_contents($this->defaultView . '.md'));
+			if (file_exists($this->defaultHTMLPath . $this->defaultView . '.html') != true) {
+				$cache->MD2HTML($this->defaultMDPath . $this->defaultView . '.md');
+			}
+			require_once $this->defaultHTMLPath . $this->defaultView . '.html';
 		}else{
-			if ($this->pathExists !== false) {
-				echo $converter->convert(file_get_contents('../src/documents/' . $this->path . '.md'));
+			if ($this->MDExists) {
+				if (file_exists($this->defaultHTMLPath . $this->path . '.html') != true) {
+					$cache->MD2HTML($this->defaultMDPath . $this->path . '.md');
+				}
+				require_once $this->defaultHTMLPath . $this->path . '.html';
 			}else{
+				// Set the response code to 404
+				http_response_code(404);
+
+				// Create cache if the HTML file exists (it should)
+				if (file_exists($this->defaultHTMLPath . 'errors/404.html') != true) {
+					$cache->MD2HTML($this->defaultMDPath . 'errors/404.md');
+				}
+
 				// Show 404
-				echo $converter->convert(file_get_contents('../src/documents/errors/404.md'));
+				require_once $this->defaultHTMLPath . 'errors/404.html';
 			}
 		}
+
+		// Get footer
+		require_once 'assets/viewables/footer.php';
 	}
 
 }
