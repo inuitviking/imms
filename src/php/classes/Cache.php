@@ -50,14 +50,6 @@ class Cache {
 	}
 
 	/**
-	 * Bulk generates the cache.
-	 * @return void
-	 */
-	public function BulkMD2HTML () {
-
-	}
-
-	/**
 	 * Clears the HTML cache for a single URL path (usually just a single HTML file)
 	 * @param $URLPath
 	 * @return void
@@ -68,13 +60,12 @@ class Cache {
 		}
 	}
 
-
 	/**
-	 * Clears the HTML cache.
+	 * @param $cachePath
 	 * @return void
 	 */
-	public function ClearCache () {
-		$files = glob($this->htmlPath.'*');
+	public function ClearCache ($cachePath) {
+		$files = glob($cachePath.'*');
 		foreach($files as $file){
 			if(is_file($file)) {
 				unlink($file);
