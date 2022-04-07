@@ -9,7 +9,7 @@ $shortopts = "c:";  // Required value
 $shortopts .= "q"; // These options do not accept values
 
 $longopts  = array(
-	"cc:",		// Required value
+	"clear-cache:",		// Required value
 	"quiet",	// No value
 );
 $options = getopt($shortopts, $longopts);
@@ -25,10 +25,23 @@ function printQuiet ($text, $q = null) {
 }
 
 if (!empty($options)) {
-	if (isset($options['cc']) || isset($options['c'])) {
+	if (isset($options['clear-cache']) || isset($options['c'])) {
+		$cc = "";
+		if (isset($options['clear-cache'])) {
+			$cc = $options['clear-cache'];
+		} elseif (isset($options['c'])) {
+			$cc = $options['c'];
+		}
+
 		$cache = new Cache();
-		printQuiet("Clearing cache.", $options);
-		$cache->ClearCache('../web/assets/cache/');
-		printQuiet("Cache cleared.", $options);
+		if ($cc === "all") {
+			$cache->ClearCache('../web/assets/cache/');
+			printQuiet("All cache cleared.", $options);
+		} else {
+			if ($cc !== "") {
+				$cache->ClearCacheSingularURL($cc, true);
+				printQuiet("Cache cleared for $cc");
+			}
+		}
 	}
 }
