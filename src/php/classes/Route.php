@@ -4,6 +4,7 @@ namespace Angus\Ivmdcms\php\classes;
 require_once '../vendor/autoload.php';
 use League\CommonMark\CommonMarkConverter;
 use ScssPhp\ScssPhp\Compiler;
+use ScssPhp\ScssPhp\Exception\SassException;
 
 class Route {
 	/**
@@ -32,6 +33,11 @@ class Route {
 	private bool $MDExists;
 	private bool $HTMLExists;
 
+
+	/**
+	 * Handles routing of MD files (cached versions).
+	 * @throws SassException
+	 */
 	public function __construct(){
 		// Default MD path
 		$this->defaultMDPath	= '../src/documents/';
