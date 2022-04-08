@@ -22,16 +22,10 @@ class Route {
 	/**
 	 * @var array
 	 */
-	private array $paths;
-	/**
-	 * @var array
-	 */
 	private array $titles;
-	private string $defaultView;
-	private string $defaultMDPath;
-	private string $defaultHTMLPath;
 	private bool $MDExists;
 	private bool $HTMLExists;
+	private array|false $ini;
 
 
 	/**
@@ -39,12 +33,7 @@ class Route {
 	 * @throws SassException
 	 */
 	public function __construct(){
-		// Default MD path
-		$this->defaultMDPath	= '../src/documents/';
-		// Default HTML path
-		$this->defaultHTMLPath	= 'assets/cache/';
-		// Select a default view
-		$this->defaultView		= 'index';
+		$this->ini = parse_ini_file(getcwd() . '/../config/config.ini');
 
 		// Fetch current path
 		$this->path				= ltrim($_SERVER['REQUEST_URI'],'/');	// Current path
@@ -59,51 +48,51 @@ class Route {
 		// Split the path into various elements.
 		$this->elements			= preg_split('/ [\/|?|&] /', $this->path);
 		// Check if MD exists.
-		$this->MDExists = file_exists($this->defaultMDPath . $this->path . '.md');
+		$this->MDExists = file_exists(getcwd() . $this->ini['app_md_path'] . $this->path . '.md');
 		// Check if HTML exists.
-		$this->HTMLExists = file_exists($this->defaultHTMLPath . $this->path . '.html');
+		$this->HTMLExists = file_exists(getcwd() . $this->ini['app_html_path'] . $this->path . '.html');
 
 		$cache = new Cache();
 
 		// If the HTML doesn't exist, create a new cached version of the raw MD. If the MD file doesn't exist, do nothing, and let it fail.
 		if ($this->HTMLExists !== true) {
 			if ($this->MDExists) {
-				$cache->MD2HTML($this->defaultMDPath . $this->path . '.md');
+				$cache->MD2HTML(getcwd() . $this->ini['app_md_path'] . $this->path . '.md');
 			}
 		}
 
 		// Compile SCSS
 		$compiler = new Compiler();
-		$compiler->SetImportPaths('../src/scss/');
-		$css = $compiler->compileString(file_get_contents('../src/scss/main.scss'))->getCss();
-		file_put_contents('assets/css/main.css', $css);
+		$compiler->SetImportPaths(getcwd() . '/..' . $this->ini['app_scss_path']);
+		$css = $compiler->compileString(file_get_contents(getcwd() . '/..' . $this->ini['app_scss_path'] . $this->ini['app_scss_file']))->getCss();
+		file_put_contents(getcwd() . $this->ini['app_css_path'], $css);
 
 		// Get header
 		require_once 'assets/viewables/header.php';
 
 		// Routing.
 		if(empty($this->elements[0])){
-			if (file_exists($this->defaultHTMLPath . $this->defaultView . '.html') != true) {
-				$cache->MD2HTML($this->defaultMDPath . $this->defaultView . '.md');
+			if (file_exists(getcwd() . '/' . $this->ini['app_html_path'] . $this->ini['app_default_view'] . '.html') != true) {
+				$cache->MD2HTML(getcwd() . '/..' . $this->ini['app_md_path'] . $this->ini['app_default_view'] . '.md');
 			}
-			require_once $this->defaultHTMLPath . $this->defaultView . '.html';
+			require_once getcwd() . '/' . $this->ini['app_html_path'] . $this->ini['app_default_view'] . '.html';
 		}else{
 			if ($this->MDExists) {
-				if (file_exists($this->defaultHTMLPath . $this->path . '.html') != true) {
-					$cache->MD2HTML($this->defaultMDPath . $this->path . '.md');
+				if (file_exists(getcwd() . $this->ini['app_html_path'] . $this->path . '.html') != true) {
+					$cache->MD2HTML(getcwd() . $this->ini['app_md_path'] .  $this->path . '.md');
 				}
-				require_once $this->defaultHTMLPath . $this->path . '.html';
+				require_once getcwd() . $this->ini['app_html_path'] . $this->path . '.html';
 			}else{
 				// Set the response code to 404
 				http_response_code(404);
 
 				// Create cache if the HTML file exists (it should)
-				if (file_exists($this->defaultHTMLPath . 'errors/404.html') != true) {
-					$cache->MD2HTML($this->defaultMDPath . 'errors/404.md');
+				if (file_exists(getcwd() . $this->ini['app_html_path'] . 'errors/404.html') != true) {
+					$cache->MD2HTML(getcwd() . $this->ini['app_md_path'] . 'errors/404.md');
 				}
 
 				// Show 404
-				require_once $this->defaultHTMLPath . 'errors/404.html';
+				require_once getcwd() . $this->ini['app_md_path'] . 'errors/404.html';
 			}
 		}
 
