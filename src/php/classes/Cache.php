@@ -13,7 +13,7 @@ class Cache {
 
 
 	public function __construct () {
-		$this->ini = parse_ini_file(getcwd() . '/../config/config.ini');
+		$this->ini = parse_ini_file(Bootstrapper::RootDirectory() . '/config/config.ini');
 	}
 
 	/**
@@ -32,7 +32,7 @@ class Cache {
 		// If the file exists
 		if (file_exists($file)) {
 			// Fetch folder structure
-			$folderStructure = str_replace(getcwd() . '/..' . $this->ini['app_md_path'], "", $file);
+			$folderStructure = str_replace(Bootstrapper::RootDirectory() . $this->ini['app_md_path'], "", $file);
 			$folderStructure = substr($folderStructure, 0, strrpos($folderStructure, '/'));
 
 			if (strlen($folderStructure) > 0) {
@@ -48,7 +48,7 @@ class Cache {
 			$HTMLFile = $folderStructure . $HTMLFile;
 
 			// Create HTML file.
-			file_put_contents(getcwd() . $this->ini['app_html_path'] . $HTMLFile, $converter->convert(file_get_contents($file)));
+			file_put_contents(Bootstrapper::RootDirectory() . $this->ini['app_html_path'] . $HTMLFile, $converter->convert(file_get_contents($file)));
 		}else {
 			echo "File '$file' doesn't exist.";
 		}
@@ -64,13 +64,13 @@ class Cache {
 	public function ClearCacheSingularURL ($URLPath, $cli = false) {
 
 		if ($cli) {
-			if(file_exists(getcwd() . $this->ini['app_html_path'] . $URLPath . '.html')){
-				unlink(getcwd() . $this->ini['app_html_path'] . $URLPath . '.html');
+			if(file_exists(Bootstrapper::RootDirectory() . $this->ini['app_html_path'] . $URLPath . '.html')){
+				unlink(Bootstrapper::RootDirectory() . $this->ini['app_html_path'] . $URLPath . '.html');
 			}
 		}
 
-		if(file_exists(getcwd() . $this->ini['app_html_path'] . $URLPath . '.html')){
-			unlink(getcwd() . $this->ini['app_html_path'] . $URLPath . '.html');
+		if(file_exists(Bootstrapper::RootDirectory() . $this->ini['app_html_path'] . $URLPath . '.html')){
+			unlink(Bootstrapper::RootDirectory() . $this->ini['app_html_path'] . $URLPath . '.html');
 		}
 	}
 
