@@ -2,6 +2,8 @@
 
 namespace Angus\Ivmdcms\php\classes;
 require_once '../vendor/autoload.php';
+
+use JetBrains\PhpStorm\Pure;
 use League\CommonMark\CommonMarkConverter;
 use ScssPhp\ScssPhp\Compiler;
 
@@ -12,12 +14,17 @@ class Cache {
 	private array|false $ini;
 
 
-	public function __construct () {
+	/**
+	 * The Cache class takes care of rendering markdown into HTML.
+	 * This is mostly used to pre-render the markdown and store it to a cache directory for faster load times.
+	 * There are also methods for clearing caches.
+	 */
+	#[Pure(true)] public function __construct () {
 		$this->ini = parse_ini_file(Bootstrapper::RootDirectory() . '/config/config.ini');
 	}
 
 	/**
-	 * Generates HTML file for a single MD file.
+	 * Renders a single markdown file into HTML.
 	 * @param $file
 	 * @param $settings
 	 * @return void
@@ -59,9 +66,10 @@ class Cache {
 	 * Example:
 	 * The url is example.com/php/functions/file_exists, the "urlPath" will then be "php/functions/file_exists".
 	 * @param $URLPath
+	 * @param bool $cli
 	 * @return void
 	 */
-	public function ClearCacheSingularURL ($URLPath, $cli = false) {
+	public function ClearCacheSingularURL ($URLPath, bool $cli = false) {
 
 		if ($cli) {
 			if(file_exists(Bootstrapper::RootDirectory() . $this->ini['app_html_path'] . $URLPath . '.html')){
@@ -75,6 +83,7 @@ class Cache {
 	}
 
 	/**
+	 * Clears the entire cache. Markdown will be rendered on first load.
 	 * @param $cachePath
 	 * @return void
 	 */

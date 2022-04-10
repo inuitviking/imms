@@ -28,7 +28,10 @@ class Route {
 	private array|false $ini;
 
 	/**
-	 * Handles routing of MD files (cached versions).
+	 * Handles routing in general.
+	 * Will always load rendered markdown (HTML files; see Cache.php).
+	 * If there is no available HTML file, it will check if the MD exists, and render it if it does.
+	 * If not, it will throw a 404.
 	 * @throws SassException
 	 */
 	public function __construct(){
