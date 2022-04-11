@@ -1,4 +1,7 @@
-<!DOCTYPE HTML>
+<?php
+namespace Angus\Ivmdcms\php\classes;
+require_once Bootstrapper::RootDirectory() . '/vendor/autoload.php';
+?><!DOCTYPE HTML>
 
 <html>
 	<head>
@@ -6,9 +9,8 @@
 	</head>
 	<header>
 		<nav>
-			<ul>
-				<li><a href="/">Index</a></li>
-			</ul>
+			<?php
+			Route::CreateMenu(Bootstrapper::RootDirectory() . "/src/documents/");
+			?>
 		</nav>
 	</header>
-<div></div>

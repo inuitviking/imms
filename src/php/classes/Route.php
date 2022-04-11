@@ -102,4 +102,26 @@ class Route {
 		require_once 'assets/viewables/footer.php';
 	}
 
+	public static function CreateMenu ($dir) {
+		if (is_dir($dir)) {
+			if (basename($dir) != 'errors') {
+				echo "<li><a href='#'>".ucfirst(basename($dir))."</a><ul>";
+
+				foreach (glob("$dir/*") as $path) {
+					self::CreateMenu($path);
+				}
+
+				echo "</ul></li>";
+			}
+		} else {
+			$extension = pathinfo($dir);
+			$extension = $extension['extension'];
+
+			$url = str_replace(Bootstrapper::RootDirectory() . '/src/documents/', "", $dir);
+			$url = str_replace('.md', "", $url);
+
+			echo "<li><a href='$url'>".ucfirst(basename($dir, ".".$extension))."</a></li>";
+		}
+	}
+
 }
