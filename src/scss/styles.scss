@@ -1,8 +1,12 @@
 @import "variables";
 
-div {
+/*
+ * Sidebar navigation
+ */
+div.sidebar {
+	// Defining size and block
 	display: block;
+	float: left;
+	overflow-x: scroll;
 	background-color: $main;
-	width: 100px;
-	height: 100px;
 }

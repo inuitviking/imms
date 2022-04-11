@@ -1,6 +1,9 @@
-div {
+/*
+ * Sidebar navigation
+ */
+div.sidebar {
   display: block;
+  float: left;
+  overflow-x: scroll;
   background-color: red;
-  width: 100px;
-  height: 100px;
 }
