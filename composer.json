@@ -4,7 +4,6 @@
     "type": "project",
     "require": {
         "league/commonmark": "^2.2",
-        "clickfwd/yoyo": "^0.8.1",
         "scssphp/scssphp": "^1.10"
     },
     "license": "GPL-3.0",

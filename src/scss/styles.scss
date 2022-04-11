@@ -1,12 +1,122 @@
 @import "variables";
 
-/*
- * Sidebar navigation
- */
-div.sidebar {
-	// Defining size and block
-	display: block;
-	float: left;
-	overflow-x: scroll;
-	background-color: $main;
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	background-color: $eerie-black;
+
+	/*
+	 * Header
+	 */
+	header {
+		background-color: $onyx;
+		padding: 2px;
+
+		pre, p , h1, h2, h3, h4, h5, h6 {
+			color: #FFFFFF;
+		}
+
+		/*
+		 * Searchbar
+		 */
+		.searchbar {
+			width: 325px;
+			margin: 5px auto;
+			#search {
+				font-size: 25px;
+				width: calc(100% - 10px);
+				padding: 5px;
+				border: none;
+				border-radius: 50px;
+				text-align: center;
+				background-color: $onyx-bright;
+				color: #FFFFFF;
+			}
+
+			#search-result {
+				position: absolute;
+				top: 54px;
+				display: block;
+				background-color: $onyx-bright;
+				color: #FFFFFF;
+				border-radius: 5px;
+				overflow: hidden;
+				word-wrap: normal;
+				width: 325px;
+				div {
+					a {
+						display: block;
+						width: 100%;
+						padding: 10px;
+						color: #FFFFFF;
+						text-decoration: none;
+						&:hover{
+							background-color: $green-pigment;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/*
+	 * Sidebar navigation
+	 */
+	div.sidebar {
+		background-color: $onyx;
+		color: #FFFFFF;
+		display: block;
+		float: left;
+		word-wrap: normal;
+		border-radius: 10px;
+		padding: 10px;
+		margin: 10px;
+		width: 15%;
+		list-style-type: none;
+		ul {
+			list-style-type: none;
+			padding-left: 15px;
+		}
+		li {
+			width: 100%;
+		}
+		a {
+			display: inline-block;
+			color: #FFFFFF;
+			text-decoration: none;
+			width: 100%;
+			&::after {
+				content: "";
+				display: block;
+				background-color: #FFFFFF;
+				width: 0%;
+				height: 1px;
+				transition: ease 500ms;
+			}
+			&:hover {
+				&::after {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	/*
+	 * Main content
+	 */
+	main {
+		width: calc(85% - 100px);
+		background-color: $onyx;
+		float: left;
+		margin: 10px;
+		padding: 20px;
+		border-radius: 10px;
+		color: #FFFFFF;
+		a {
+			color: $carolina-blue;
+		}
+	}
 }
