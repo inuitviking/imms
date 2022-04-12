@@ -5,9 +5,9 @@ namespace Angus\Ivmdcms\php\classes;
 class Helpers {
 
 	public static function SearchAjax ($search) {
-
+		$ini = parse_ini_file(Bootstrapper::RootDirectory() . '/config/config.ini');
 		if ($search != "") {
-			exec("grep -rli /var/www/src/documents/* -e '$search'", $result);
+			exec('grep -rli ' . Bootstrapper::RootDirectory() . $ini['app_md_path'] . '* -e "' . $search . '"', $result);
 			echo '<div>';
 			if (empty($result)) {
 				echo "<a>No results.</a>";
