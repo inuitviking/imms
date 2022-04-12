@@ -6,8 +6,8 @@ require_once Bootstrapper::RootDirectory() . '/vendor/autoload.php';
 
 <html>
 	<head>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
 		<link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
-<!--		<script src="assets/js/main.js" ></script>-->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript" src="/assets/js/main.js"></script>
 	</head>

@@ -94,7 +94,7 @@ class Route {
 				}
 
 				// Show 404
-				require_once Bootstrapper::RootDirectory() . $this->ini['app_md_path'] . 'errors/404.html';
+				require_once Bootstrapper::RootDirectory() . $this->ini['app_html_path'] . 'errors/404.html';
 			}
 		}
 

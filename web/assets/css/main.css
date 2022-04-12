@@ -1,8 +1,23 @@
+@font-face {
+  font-family: "Rinnet";
+  src: url("/assets/fonts/Rinnet-Regular.otf");
+}
+@font-face {
+  font-family: "OpenSans";
+  src: url("/assets/fonts/OpenSans.ttf");
+}
+/* SCSS HEX */
+/* SCSS Gradient */
 /* SCSS HEX */
 /* SCSS Gradient */
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  overflow-y: scroll;
 }
 html {
   background-color: #1d201f;
@@ -14,6 +29,9 @@ html {
 	 */
   /*
 	 * Main content
+	 */
+  /*
+	 * Footer
 	 */
 }
 html header {
@@ -64,6 +82,7 @@ html header .searchbar #search-result div a:hover {
 html div.sidebar {
   background-color: #393d3f;
   color: #FFFFFF;
+  font-family: "OpenSans", sans;
   display: block;
   float: left;
   word-wrap: normal;
@@ -99,15 +118,34 @@ html div.sidebar a:hover::after {
 }
 html main {
   width: calc(85% - 100px);
+  min-height: calc(100vh - 218px);
   background-color: #393d3f;
   float: left;
   margin: 10px;
-  padding: 20px;
+  padding: 20px 20px 50px 20px;
   border-radius: 10px;
   color: #FFFFFF;
 }
+html main p, html main a, html main h1, html main h2, html main h3, html main h4, html main h5, html main h6 {
+  font-family: "Rinnet", serif;
+}
+html main code, html main pre {
+  font-family: "Hack", monospace;
+}
 html main a {
   color: #5998c5;
+  transition: ease 300ms;
 }
-/* SCSS HEX */
-/* SCSS Gradient */
+html main a:hover {
+  color: #08a045;
+}
+html footer {
+  clear: both;
+  padding: 10px;
+  background-color: #393d3f;
+  font-family: "OpenSans", sans;
+}
+html footer p {
+  color: #FFFFFF;
+  text-align: center;
+}

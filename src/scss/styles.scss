@@ -3,6 +3,12 @@
 html, body {
 	margin: 0;
 	padding: 0;
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	overflow-y: scroll;
 }
 
 html {
@@ -68,6 +74,7 @@ html {
 	div.sidebar {
 		background-color: $onyx;
 		color: #FFFFFF;
+		font-family: "OpenSans", sans;
 		display: block;
 		float: left;
 		word-wrap: normal;
@@ -109,14 +116,39 @@ html {
 	 */
 	main {
 		width: calc(85% - 100px);
+		min-height: calc(100vh - 218px);
 		background-color: $onyx;
 		float: left;
 		margin: 10px;
-		padding: 20px;
+		padding: 20px 20px 50px 20px;
 		border-radius: 10px;
 		color: #FFFFFF;
+		p, a, h1, h2, h3, h4, h5, h6 {
+			font-family: "Rinnet", serif;
+		}
+		code, pre {
+			font-family: "Hack", monospace;
+		}
 		a {
 			color: $carolina-blue;
+			transition: ease 300ms;
+			&:hover {
+				color: $green-pigment;
+			}
+		}
+	}
+
+	/*
+	 * Footer
+	 */
+	footer {
+		clear: both;
+		padding: 10px;
+		background-color: $onyx;
+		font-family: "OpenSans", sans;
+		p {
+			color: #FFFFFF;
+			text-align: center;
 		}
 	}
 }
