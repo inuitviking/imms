@@ -1,8 +1,5 @@
 RewriteEngine On
 
-#Allow access to files folder
-#RewriteRule ^(files)($|/) - [L]
-
 # This ensures that links to various things work before everything is rewritten
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
@@ -12,7 +9,7 @@ RewriteRule ^[^/]+/([^.]+\.(?:js|css|jpe?g|png|gif))$ /$1 [L,R=301,NC]
 # Rewrite first parameter
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^/]+)$ index.php?page=$1 [L]
+RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 
 # Rewrite uid paramter
 RewriteCond %{REQUEST_FILENAME} !-f
