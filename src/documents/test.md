@@ -16,3 +16,5 @@ echo "test";
 ```
 
 [test_link](https://runur.rocks)
+
+testing `inline code` between text.

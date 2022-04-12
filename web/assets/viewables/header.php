@@ -10,6 +10,10 @@ require_once Bootstrapper::RootDirectory() . '/vendor/autoload.php';
 		<link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript" src="/assets/js/main.js"></script>
+
+		<link rel="stylesheet" href="/assets/css/dark.min.css">
+		<script src="/assets/js/highlight.min.js"></script>
+		<script>hljs.highlightAll();</script>
 	</head>
 	<body>
 		<header>
