@@ -44,7 +44,7 @@ class Cache {
 
 			if (strlen($folderStructure) > 0) {
 				if (!is_dir($this->htmlPath . $folderStructure)) {
-					mkdir($this->htmlPath . $folderStructure, 0755, true);
+					mkdir($this->htmlPath . $folderStructure, 0775, true);
 				}
 				$folderStructure .= '/';
 			}
