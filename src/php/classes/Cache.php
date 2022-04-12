@@ -94,9 +94,7 @@ class Cache {
 				unlink($file);
 			}
 			if(is_dir($file)){
-				array_map("unlink", glob("$file/*"));
-				array_map("rmdir", glob("$file/*"));
-				rmdir($file);
+				exec("rm -rf $file");
 			}
 		}
 	}
