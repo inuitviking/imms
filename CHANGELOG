@@ -1,0 +1,16 @@
+# v22.04.12.2 Patch release 
+- Patched caching to give right permissions to cache.
+- "Patched" caching to use execute rm -rf on cache directory (better options to be explored).
+- Patched the search engine to work outside of docker, so it should work everywhere now.
+
+# v22.04.12.1 Patch release
+- Patched caching; solves the issue of not being able to recursively create subdirectories in cache directory.
+- Patched routing; solves the issues routing wrong and not being able to send paths to where they're supposed to.
+- Patched CSS in the sidebar; solves the display of long text; also added fancy CSS
+
+# v22.04.12
+- The very first release.
+- Has a simple search bar.
+- Has a simple tree like sidebar navigation.
+- Has syntax highlighting thanks to highlight.js
+- Has a very simple CLI tool (for clearing the cache for now)

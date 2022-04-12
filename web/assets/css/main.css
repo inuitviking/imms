@@ -82,10 +82,10 @@ html header .searchbar #search-result div a:hover {
 html div.sidebar {
   background-color: #393d3f;
   color: #FFFFFF;
-  font-family: "OpenSans", sans;
+  font-family: "OpenSans", sans-serif;
   display: block;
   float: left;
-  word-wrap: normal;
+  word-wrap: break-word;
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
@@ -100,21 +100,43 @@ html div.sidebar li {
   width: 100%;
 }
 html div.sidebar a {
+  position: relative;
   display: inline-block;
   color: #FFFFFF;
   text-decoration: none;
   width: 100%;
+  transition: ease 500ms;
+  z-index: 3;
 }
-html div.sidebar a::after {
+html div.sidebar a::before {
   content: "";
+  position: absolute;
+  bottom: 0;
   display: block;
   background-color: #FFFFFF;
-  width: 0%;
+  width: 0;
   height: 1px;
   transition: ease 500ms;
 }
-html div.sidebar a:hover::after {
+html div.sidebar a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #4c5154;
+  transition: ease 500ms;
+  z-index: -1;
+}
+html div.sidebar a:hover {
+  padding-left: 10px;
+}
+html div.sidebar a:hover::after, html div.sidebar a:hover::before {
   width: 100%;
+}
+html div.sidebar a:hover::before {
+  left: 0;
 }
 html main {
   width: calc(85% - 100px);

@@ -74,10 +74,10 @@ html {
 	div.sidebar {
 		background-color: $onyx;
 		color: #FFFFFF;
-		font-family: "OpenSans", sans;
+		font-family: "OpenSans", sans-serif;
 		display: block;
 		float: left;
-		word-wrap: normal;
+		word-wrap: break-word;
 		border-radius: 10px;
 		padding: 10px;
 		margin: 10px;
@@ -91,23 +91,44 @@ html {
 			width: 100%;
 		}
 		a {
+			position: relative;
 			display: inline-block;
 			color: #FFFFFF;
 			text-decoration: none;
 			width: 100%;
-			&::after {
+			transition: ease 500ms;
+			&::before {
 				content: "";
+				position: absolute;
+				bottom: 0;
 				display: block;
 				background-color: #FFFFFF;
-				width: 0%;
+				width: 0;
 				height: 1px;
 				transition: ease 500ms;
 			}
+			&::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 0;
+				height: 100%;
+				background-color: $onyx-bright;
+				transition: ease 500ms;
+				z-index: -1;
+			}
 			&:hover {
-				&::after {
+				&::after, &::before {
 					width: 100%;
 				}
+				&::before {
+					left: 0;
+				}
+
+				padding-left: 10px;
 			}
+			z-index: 3;
 		}
 	}
 

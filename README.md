@@ -52,3 +52,18 @@ The plan is to expand the markdown beyond commonmark
 - [league/commonmark](https://github.com/thephpleague/commonmark)
 - [scssphp/scssphp](https://scssphp.github.io/scssphp/)
 - [editor.md](https://github.com/pandao/editor.md) (not yet, but plan to)
+
+## Notes for dev
+### How to release
+Remember the version convention: year.month.day[.patch].
+
+Create a tag:
+```bash
+git tag v[VERSION]
+```
+
+Go to [Releases](https://gitlab.com/InuitViking/ivmdcms/-/releases) and edit your release with the archives you've created with the following commands:
+```bash
+tar -zcvf ivmdcms-22.04.12.tar.gz --exclude="ivmdcms/.docksal" --exclude="ivmdcms/.git" --exclude="ivmdcms/.idea" --exclude="ivmdcms/.gitignore" --exclude="ColourPalette.png" --exclude="vendor" ivmdcms/
+zip -r ivmdcms-22.04.12.zip ivmdcms -x "ivmdcms/.docksal/*" -x "ivmdcms/.git/*" -x "ivmdcms/.idea/*" -x ivmdcms/.gitignore -x ivmdcms/ColourPalette.png -x "ivmdcms/vendor/*"
+```

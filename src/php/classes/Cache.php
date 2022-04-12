@@ -44,7 +44,7 @@ class Cache {
 
 			if (strlen($folderStructure) > 0) {
 				if (!is_dir($this->htmlPath . $folderStructure)) {
-					mkdir($this->htmlPath . $folderStructure);
+					mkdir($this->htmlPath . $folderStructure, 0775, true);
 				}
 				$folderStructure .= '/';
 			}
@@ -94,9 +94,7 @@ class Cache {
 				unlink($file);
 			}
 			if(is_dir($file)){
-				array_map("unlink", glob("$file/*"));
-				array_map("rmdir", glob("$file/*"));
-				rmdir($file);
+				exec("rm -rf $file");
 			}
 		}
 	}
