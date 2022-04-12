@@ -23,6 +23,7 @@ The plan is to expand the markdown beyond commonmark
 ## Goals
  - [x] Create a suitable markdown display tool.
  - [x] Add configuration (PHP has built in INI support, so this was used).
+ - [x] Add a functioning search bar with Ajax.
  - [x] Add highlight.js for syntax highlighting.
  - [ ] Implement an administration interface.
  - [ ] Clean up CSS.
