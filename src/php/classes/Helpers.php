@@ -1,6 +1,6 @@
 <?php
 
-namespace Angus\Ivmdcms\php\classes;
+namespace Angus\Imms\php\classes;
 
 class Helpers {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Angus\Ivmdcms\php\classes;
+namespace Angus\Imms\php\classes;
 require_once '../vendor/autoload.php';
 use League\CommonMark\CommonMarkConverter;
 use ScssPhp\ScssPhp\Compiler;

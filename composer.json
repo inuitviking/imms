@@ -1,5 +1,5 @@
 {
-    "name": "angus/ivmdcms",
+    "name": "angus/imms",
     "description": "Basic MD CMS",
     "type": "project",
     "require": {
@@ -9,7 +9,7 @@
     "license": "GPL-3.0",
     "autoload": {
         "psr-4": {
-            "Angus\\Ivmdcms\\": "src/"
+            "Angus\\Imms\\": "src/"
         }
     },
     "authors": [

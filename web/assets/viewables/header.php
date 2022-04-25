@@ -1,10 +1,10 @@
 <?php
-namespace Angus\Ivmdcms\php\classes;
+namespace Angus\Imms\php\classes;
 require_once Bootstrapper::RootDirectory() . '/vendor/autoload.php';
 
 ?><!DOCTYPE html>
 
-<html>
+<html lang="en">
 	<head>
 		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
 		<link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
@@ -14,17 +14,18 @@ require_once Bootstrapper::RootDirectory() . '/vendor/autoload.php';
 		<link rel="stylesheet" href="/assets/css/dark.min.css">
 		<script src="/assets/js/highlight.min.js"></script>
 		<script>
-		hljs.highlightAll();
+			import hljs from "../js/highlight.min";
+			hljs.highlightAll();
 
-		function hideResult() {
-			document.getElementById("search-result").style.display = 'none';
-		}
+			function hideResult() {
+				document.getElementById("search-result").style.display = 'none';
+			}
 		</script>
 	</head>
 	<body>
 		<header>
 			<div class="searchbar">
-				<input type="text" id="search" placeholder="Search" onBlur="hideResult()"/>
+				<label for="search" style="display: none;">Search</label><input type="text" id="search" placeholder="Search" onBlur="hideResult()"/>
 				<div id="search-result"></div>
 			</div>
 		</header>

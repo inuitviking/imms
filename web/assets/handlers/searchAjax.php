@@ -1,8 +1,8 @@
 <?php
 
 // A couple of usings
-use Angus\Ivmdcms\php\classes\Bootstrapper;
-use Angus\Ivmdcms\php\classes\Helpers;
+use Angus\Imms\php\classes\Bootstrapper;
+use Angus\Imms\php\classes\Helpers;
 
 // I have no idea why this is needed
 require_once '../../../src/php/classes/Bootstrapper.php';

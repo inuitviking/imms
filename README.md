@@ -1,7 +1,4 @@
-# IVMDCMS - InuitViking MarkDown Content Management System
-
-A "CMS" to handle markdown files. Currently, there is no administration interface, but that may appear at a later time.
-
+# IMMS - Inuitviking Markdown Management System
 It's a stand-in replacement for some other similar CMS' I have tried, as the others weren't entirely satisfactory.
 
 Either they didn't work fully, or they barely worked.
@@ -62,7 +59,7 @@ Create a tag:
 git tag v[VERSION]
 ```
 
-Go to [Releases](https://gitlab.com/InuitViking/ivmdcms/-/releases) and edit your release with the archives you've created with the following commands:
+Go to [Releases](https://gitlab.com/InuitViking/imms/-/releases) and edit your release with the archives you've created with the following commands:
 ```bash
 tar -zcvf ivmdcms-22.04.12.tar.gz --exclude="ivmdcms/.docksal" --exclude="ivmdcms/.git" --exclude="ivmdcms/.idea" --exclude="ivmdcms/.gitignore" --exclude="ColourPalette.png" --exclude="vendor" ivmdcms/
 zip -r ivmdcms-22.04.12.zip ivmdcms -x "ivmdcms/.docksal/*" -x "ivmdcms/.git/*" -x "ivmdcms/.idea/*" -x ivmdcms/.gitignore -x ivmdcms/ColourPalette.png -x "ivmdcms/vendor/*"
