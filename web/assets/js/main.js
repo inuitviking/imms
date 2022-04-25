@@ -1,3 +1,4 @@
+
 //Getting value from "ajax.php".
 function fill(Value) {
 	//Assigning value to "search" div in "search.php" file.
@@ -5,6 +6,7 @@ function fill(Value) {
 	//Hiding "display" div in "search.php" file.
 	$('#search-result').hide();
 }
+
 $(document).ready(function() {
 	//On pressing a key on "Search box" in "search.php" file. This function will be called.
 	$("#search").keyup(function() {

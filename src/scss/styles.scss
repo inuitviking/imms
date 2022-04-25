@@ -59,7 +59,7 @@ html {
 						padding: 10px;
 						color: #FFFFFF;
 						text-decoration: none;
-						&:hover{
+						&:hover, &:focus{
 							background-color: $green-pigment;
 						}
 					}

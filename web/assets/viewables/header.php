@@ -13,12 +13,18 @@ require_once Bootstrapper::RootDirectory() . '/vendor/autoload.php';
 
 		<link rel="stylesheet" href="/assets/css/dark.min.css">
 		<script src="/assets/js/highlight.min.js"></script>
-		<script>hljs.highlightAll();</script>
+		<script>
+		hljs.highlightAll();
+
+		function hideResult() {
+			document.getElementById("search-result").style.display = 'none';
+		}
+		</script>
 	</head>
 	<body>
 		<header>
 			<div class="searchbar">
-				<input type="text" id="search" placeholder="Search" />
+				<input type="text" id="search" placeholder="Search" onBlur="hideResult()"/>
 				<div id="search-result"></div>
 			</div>
 		</header>

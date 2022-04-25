@@ -76,7 +76,7 @@ html header .searchbar #search-result div a {
   color: #FFFFFF;
   text-decoration: none;
 }
-html header .searchbar #search-result div a:hover {
+html header .searchbar #search-result div a:hover, html header .searchbar #search-result div a:focus {
   background-color: #08a045;
 }
 html div.sidebar {
